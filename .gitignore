@@ -1,0 +1,10 @@
+out/
+build/
+cmake-build/
+node_modules/
+*.o
+*.obj
+*.node
+*.idx
+bench_index.bin
+.vs/

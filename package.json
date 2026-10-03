@@ -1,0 +1,26 @@
+{
+  "name": "vecsearch",
+  "version": "1.0.0",
+  "description": "An HNSW vector index written in C++ with AVX2 distance kernels and memory-mapped storage, callable from Node.",
+  "main": "binding/index.js",
+  "types": "binding/index.d.ts",
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "rebuild": "node-gyp rebuild",
+    "test": "node binding/test.js",
+    "bench": "node bench/compare.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "node-addon-api": "^8.9.2",
+    "sqlite-vec": "^0.1.9"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "optionalDependencies": {
+    "better-sqlite3": "^13.0.3",
+    "sqlite-vec": "^0.1.9"
+  }
+}
