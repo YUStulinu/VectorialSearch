@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build and run the C++ tests
+        run: make -j4 test
+
+      - name: C++ tests under AddressSanitizer
+        run: make asan
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      # npm ci builds the native addon with node-gyp.
+      - name: Node binding
+        run: |
+          npm ci
+          npm test
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build
+        run: |
+          cmake -S . -B cmake-build
+          cmake --build cmake-build --config Release --parallel
+
+      - name: Test
+        run: ctest --test-dir cmake-build -C Release --output-on-failure
